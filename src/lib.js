@@ -1,4 +1,4 @@
-const makeConstant = undefined;
+//const makeConstant = undefined;
 const makeCounterFromN = undefined;
 const makeCounterFromZero = undefined;
 const makeDeltaTracker = undefined;
@@ -20,6 +20,14 @@ const indexCreater = function(list){
   }
 }
 
+//--------------main function------------------//
+
+const makeConstant = function(valueToMakeConstant){
+  return constant = function(){
+    return valueToMakeConstant;
+  }
+}
+
 const makeCycler = function(list){
   let listToCycle = list.map(createList);
   let index = indexCreater(listToCycle);
@@ -27,6 +35,12 @@ const makeCycler = function(list){
    return listToCycle[index()];
   }
 }
+
+//const curry = function(functionReferrence,argv1){
+//  return function(argv2){
+//    return functionReferrence(argv1,argv2);
+//  }
+//}
 
 exports.makeConstant=makeConstant;
 exports.makeCounterFromZero=makeCounterFromZero;
