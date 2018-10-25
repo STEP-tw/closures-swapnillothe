@@ -2,7 +2,7 @@
 //const makeCounterFromN = undefined;
 //const makeCounterFromZero = undefined;
 //const makeDeltaTracker = undefined;
-const makeFiboGenerator = undefined;
+//const makeFiboGenerator = undefined;
 //const makeCycler = undefined;
 //const curry = undefined;
 //const compose = undefined;
@@ -73,6 +73,29 @@ const compose = function(func1,func2){
     return func1(func2(num1,num2));
   }
 }
+
+const makeFiboGenerator = function(previousNumber,currentNumber){
+  if(!previousNumber && !currentNumber){
+    previousNumber = 0;
+    currentNumber = 1;
+  }
+  if(previousNumber && !currentNumber){
+    currentNumber = previousNumber;
+    previousNumber = 0;
+  }
+
+  let secondNum = currentNumber - previousNumber;
+  let firstNum = currentNumber - (2*secondNum);
+
+  return function(){
+    let fibo = firstNum + secondNum;
+    firstNum = secondNum;
+    secondNum = fibo;
+    return fibo;
+  }
+}
+
+const getNextFiboNumber = makeFiboGenerator(0,3);
 
 //----------------exports----------------------//
 exports.makeConstant=makeConstant;
