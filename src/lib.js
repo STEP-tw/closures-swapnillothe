@@ -11,18 +11,22 @@ const createList = function(listMember){
   return listMember;
 }
 
-const makeCycler = function(list){
+const indexCreater = function(list){
   let index = 0;
-  let listToCycle = list.map(createList);
-  return cycleList = function(){
-    if(index == (listToCycle.length)){
+  return function(){
+    if(index == list.length)
       index = 0;
-    }
-   return listToCycle[index++];
+   return index++;
   }
 }
 
-
+const makeCycler = function(list){
+  let listToCycle = list.map(createList);
+  let index = indexCreater(listToCycle);
+  return cycleList = function(){
+   return listToCycle[index()];
+  }
+}
 
 exports.makeConstant=makeConstant;
 exports.makeCounterFromZero=makeCounterFromZero;
