@@ -1,5 +1,5 @@
 //const makeConstant = undefined;
-const makeCounterFromN = undefined;
+//const makeCounterFromN = undefined;
 const makeCounterFromZero = undefined;
 const makeDeltaTracker = undefined;
 const makeFiboGenerator = undefined;
@@ -11,12 +11,18 @@ const createList = function(listMember){
   return listMember;
 }
 
-const indexCreater = function(list){
+const counter = function(list){
   let index = 0;
   return function(){
     if(index == list.length)
       index = 0;
    return index++;
+  }
+}
+
+const count = function(startingNumber){
+  return function(){
+   return startingNumber++;
   }
 }
 
@@ -30,10 +36,14 @@ const makeConstant = function(valueToMakeConstant){
 
 const makeCycler = function(list){
   let listToCycle = list.map(createList);
-  let index = indexCreater(listToCycle);
+  let index = counter(listToCycle);
   return cycleList = function(){
    return listToCycle[index()];
   }
+}
+
+const makeCounterFromN = function(startNumber){
+  return count(startNumber);
 }
 
 //const curry = function(functionReferrence,argv1){
@@ -41,7 +51,7 @@ const makeCycler = function(list){
 //    return functionReferrence(argv1,argv2);
 //  }
 //}
-
+//----------------exports----------------------//
 exports.makeConstant=makeConstant;
 exports.makeCounterFromZero=makeCounterFromZero;
 exports.makeCounterFromN=makeCounterFromN;
