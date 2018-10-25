@@ -1,7 +1,7 @@
 //const makeConstant = undefined;
 //const makeCounterFromN = undefined;
-const makeCounterFromZero = undefined;
-const makeDeltaTracker = undefined;
+//const makeCounterFromZero = undefined;
+//const makeDeltaTracker = undefined;
 const makeFiboGenerator = undefined;
 //const makeCycler = undefined;
 const curry = undefined;
@@ -45,6 +45,24 @@ const makeCycler = function(list){
 const makeCounterFromN = function(startNumber){
   return count(startNumber);
 }
+
+const makeCounterFromZero = function(){
+  return count(0);
+}
+
+const makeDeltaTracker = function(number){
+  let trackedDelta = {old: number,delta: 0,new: number};
+  return function(numberToAdd){
+    if(numberToAdd){
+    trackedDelta.old = trackedDelta.new
+    trackedDelta.delta = numberToAdd
+    trackedDelta.new = trackedDelta.old + numberToAdd;
+    }
+    return trackedDelta;
+  }
+}
+
+
 
 //const curry = function(functionReferrence,argv1){
 //  return function(argv2){
