@@ -1,69 +1,72 @@
-//const makeConstant = undefined;
-//const makeCounterFromN = undefined;
-//const makeCounterFromZero = undefined;
-//const makeDeltaTracker = undefined;
-//const makeFiboGenerator = undefined;
-//const makeCycler = undefined;
-//const curry = undefined;
-//const compose = undefined;
+//--------------small unit function------------//
 
-const createList = function(listMember){
-  return listMember;
+const identityFunction = function(value){
+  return value;
 }
 
 const counter = function(list){
   let index = 0;
-  return function(){
+  return increment = function(){
     if(index == list.length)
       index = 0;
    return index++;
   }
 }
 
-const count = function(startingNumber){
+const counteFrom= function(startingNumber){
   return function(){
    return startingNumber++;
+  }
+}
+
+const copyObject = function(object){
+  return function(obj,key){
+    obj[key] = object[key];
+    return obj;
   }
 }
 
 //--------------main function------------------//
 
 const makeConstant = function(valueToMakeConstant){
-  return constant = function(){
+  return function(){
     return valueToMakeConstant;
   }
 }
 
 const makeCycler = function(list){
-  let listToCycle = list.map(createList);
+  let listToCycle = list.map(identityFunction);
   let index = counter(listToCycle);
-  return cycleList = function(){
+  return function(){
    return listToCycle[index()];
   }
 }
 
 const makeCounterFromN = function(startNumber){
-  return count(startNumber);
+  return counteFrom(startNumber);
 }
 
 const makeCounterFromZero = function(){
-  return count(0);
+  return counteFrom(0);
 }
 
 const makeDeltaTracker = function(number){
   let trackedDelta = {old: number,delta: 0,new: number};
   return function(numberToAdd){
     if(numberToAdd != undefined ){
-    trackedDelta.old = trackedDelta.new
-    trackedDelta.delta = numberToAdd
-    trackedDelta.new = trackedDelta.old + numberToAdd;
+      trackedDelta.old = trackedDelta.new
+      trackedDelta.delta = numberToAdd
+      trackedDelta.new = trackedDelta.old + numberToAdd;
+      fillObject = copyObject(trackedDelta);
+      result = (Object.keys(trackedDelta)).reduce(fillObject,{});
+      return result;
     }
     return trackedDelta;
   }
 }
 
 const curry = function(functionReferrence,argv1){
-  return reff = function(argv2,argv3){
+  return function(argv2,argv3){
     return functionReferrence(argv1,argv2,argv3);
   }
 }
@@ -74,28 +77,26 @@ const compose = function(func1,func2){
   }
 }
 
-const makeFiboGenerator = function(previousNumber,currentNumber){
-  if(!previousNumber && !currentNumber){
-    previousNumber = 0;
-    currentNumber = 1;
+const makeFiboGenerator = function(firstNumber,secondNumber){
+  if(!firstNumber && !secondNumber){
+    firstNumber = 0;
+    secondNumber = 1;
   }
-  if(previousNumber && !currentNumber){
-    currentNumber = previousNumber;
-    previousNumber = 0;
+  if(firstNumber && !secondNumber){
+    secondNumber = firstNumber;
+    firstNumber = 0;
   }
 
-  let secondNum = currentNumber - previousNumber;
-  let firstNum = currentNumber - (2*secondNum);
+  let currentNumber = secondNumber - firstNumber;
+  let previousNumber = secondNumber - (2*currentNumber);
 
   return function(){
-    let fibo = firstNum + secondNum;
-    firstNum = secondNum;
-    secondNum = fibo;
+    let fibo = previousNumber+ currentNumber;
+    previousNumber = currentNumber;
+    currentNumber = fibo;
     return fibo;
   }
 }
-
-const getNextFiboNumber = makeFiboGenerator(0,3);
 
 //----------------exports----------------------//
 exports.makeConstant=makeConstant;
