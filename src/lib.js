@@ -7,8 +7,7 @@ const identityFunction = function(value){
 const counter = function(list){
   let index = 0;
   return increment = function(){
-    if(index == list.length)
-      index = 0;
+    index = index%list.length;
    return index++;
   }
 }
@@ -19,10 +18,10 @@ const counteFrom= function(startingNumber){
   }
 }
 
-const copyObject = function(object){
-  return function(obj,key){
-    obj[key] = object[key];
-    return obj;
+const copyObject = function(objectToCopy){
+  return function(newObject,key){
+    newObject[key] = objectToCopy[key];
+    return newObject;
   }
 }
 
@@ -52,6 +51,8 @@ const makeCounterFromZero = function(){
 
 const makeDeltaTracker = function(number){
   let trackedDelta = {old: number,delta: 0,new: number};
+  let duplicateOfTrackDelta = {};
+
   return function(numberToAdd){
     if(numberToAdd != undefined ){
       trackedDelta.old = trackedDelta.new
@@ -79,24 +80,14 @@ const compose = function(func1,func2){
   }
 }
 
-const makeFiboGenerator = function(firstNumber,secondNumber){
-  if(!firstNumber && !secondNumber){
-    firstNumber = 0;
-    secondNumber = 1;
-  }
-  if(firstNumber && !secondNumber){
-    secondNumber = firstNumber;
-    firstNumber = 0;
-  }
-
-  let currentNumber = secondNumber - firstNumber;
-  let previousNumber = secondNumber - (2*currentNumber);
-
+const makeFiboGenerator = function(firstNumber=1,secondNumber=0){
+  let currentNumber = Math.max(firstNumber,secondNumber);
+  let previousNumber = Math.min(firstNumber,secondNumber);
   return function(){
-    let fibo = previousNumber+ currentNumber;
+    let fibonacciNumber = previousNumber;
     previousNumber = currentNumber;
-    currentNumber = fibo;
-    return fibo;
+    currentNumber = previousNumber + fibonacciNumber;
+    return fibonacciNumber;
   }
 }
 
