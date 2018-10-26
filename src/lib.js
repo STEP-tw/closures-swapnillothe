@@ -61,7 +61,9 @@ const makeDeltaTracker = function(number){
       result = (Object.keys(trackedDelta)).reduce(fillObject,{});
       return result;
     }
-    return trackedDelta;
+    fillObject = copyObject(trackedDelta);
+    result = (Object.keys(trackedDelta)).reduce(fillObject,{});
+    return result;
   }
 }
 

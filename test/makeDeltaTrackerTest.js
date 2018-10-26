@@ -26,7 +26,6 @@ const testTracker = function() {
   assert.deepEqual({old: 3, delta: 1, new: 4}, result);
 }
 
-testTracker();
 const runTests = function() {
   if(!makeDeltaTracker) {
     console.log("Function 'makeDeltaTracker' in not implemented yet. Not running tests.");
@@ -44,3 +43,4 @@ const runTests = function() {
 };
 
 runTests();
+testTracker();
